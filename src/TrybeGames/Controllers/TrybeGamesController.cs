@@ -120,7 +120,7 @@ public class TrybeGamesController
     // 1. Crie a funcionalidde para adicionar uma nova pessoa jogadora ao banco de dados
     public void AddPlayer()
     {
-        this.Console.WriteLine("Digite o nome do novo jogador(a)");
+        this.Console.WriteLine("Digite o nome do novo jogador(a): ");
         var nomeDoJogador = this.Console.ReadLine();
         var jogador = new Player
         {
@@ -134,8 +134,15 @@ public class TrybeGamesController
     // 2. Crie a funcionalidade de adicionar um novo estúdio de jogos ao banco de dados
     public void AddGameStudio()
     {
-        // implementar
-        Console.WriteLine("Ainda não é possível realizar essa funcionalidade!");
+        this.Console.WriteLine("Digite o nome do novo estúdio de jogos: ");
+        var nomeDoEstudio = this.Console.ReadLine();
+        var estudio = new GameStudio
+        {
+            Name = nomeDoEstudio,
+            Id = database.GameStudios.Count + 1
+        };
+
+        database.GameStudios.Add(estudio);
     }
 
     // 3. Crie a funcionalidade de adicionar novo Jogo ao Banco de dados
