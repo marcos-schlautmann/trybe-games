@@ -47,7 +47,8 @@ public class TrybeGamesController
             Console.WriteLine("Opção inválida! Tente novamente.");
             return;
         }
-        try {
+        try
+        {
             var games = database.GetGamesDevelopedBy(gameStudio);
             Console.WriteLine("Jogos do estúdio de jogos " + gameStudio.Name + ":");
             foreach (var game in games)
@@ -71,7 +72,8 @@ public class TrybeGamesController
             Console.WriteLine("Pessoa jogadora não encontrada!");
             return;
         }
-        try {
+        try
+        {
             var games = database.GetGamesPlayedBy(player);
             if (games.Count() == 0)
             {
@@ -101,7 +103,8 @@ public class TrybeGamesController
             Console.WriteLine("Pessoa jogadora não encontrada!");
             return;
         }
-        try {
+        try
+        {
             var games = database.GetGamesOwnedBy(player);
             Console.WriteLine("Jogos comprados pela pessoa jogadora " + player.Name + ":");
             foreach (var game in games)
@@ -148,8 +151,22 @@ public class TrybeGamesController
     // 3. Crie a funcionalidade de adicionar novo Jogo ao Banco de dados
     public void AddGame()
     {
-        // implementar
-        Console.WriteLine("Ainda não é possível realizar essa funcionalidade!");
+        this.Console.WriteLine("Digite o nome do novo jogo: ");
+        var nomeDoJogo = this.Console.ReadLine();
+        this.Console.WriteLine("Digite a data de lançamento do jogo: ");
+        var dataDeLancamentoDoJogo = DateTime.ParseExact(this.Console.ReadLine(), "dd/MM/yyyy",
+        CultureInfo.InvariantCulture);
+        this.Console.WriteLine("Digite qual o tipo do jogo: ");
+        var tipoDoJogo = int.Parse(this.Console.ReadLine() ?? "0");
+        var jogo = new Game
+        {
+            Name = nomeDoJogo,
+            ReleaseDate = dataDeLancamentoDoJogo,
+            GameType = (GameType)tipoDoJogo,
+            Id = database.Games.Count + 1
+        };
+
+        database.Games.Add(jogo);
     }
 
     public void ChangeGameStudio(Game game)
